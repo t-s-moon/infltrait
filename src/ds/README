@@ -1,0 +1,4 @@
+This directory contains source code of data structures used in project
+
+The file closed_class.tbz2 contains results of closed-class word
+detection using two cluster kmeans

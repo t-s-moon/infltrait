@@ -1,0 +1,14 @@
+include Makefile.inc
+
+CFLAGS := -Wall -ggdb3 \
+	-DCONSERVE_MEM -DDEBUG -I$(INCLUDEDIR)
+
+HEADERS := $(wildcard *.h)
+SRC := $(wildcard *.cpp)
+OBJ = ${SRC:%.cpp=%.o}
+
+test: $(OBJ)
+	g++ $(CFLAGS) -o $@ $^
+
+%.o: %.cpp $(HEADERS)
+	g++ $< $(CFLAGS) -c -o $@

@@ -1,0 +1,39 @@
+CL_SRC = $(SRC)  cl.cpp infltrait.cpp eval.cpp
+CL_OBJ = ${CL_SRC:%.cpp=$(OPT)/%.o}
+CL_OBJ_DBG = ${CL_SRC:%.cpp=$(DBG)/%.o}
+
+CB_SRC = $(SRC)  cl_baseline.cpp infltrait.cpp eval.cpp
+CB_OBJ = ${CB_SRC:%.cpp=$(OPT)/%.o}
+CB_OBJ_DBG = ${CB_SRC:%.cpp=$(DBG)/%.o}
+
+PTEST_SRC = patricia.cpp patricia_test.cpp
+PTEST_OBJ = ${PTEST_SRC:%.cpp=$(OPT)/%.o}
+PTEST_OBJ_DBG = ${PTEST_SRC:%.cpp=$(DBG)/%.o}
+
+CORPORA = /corpora/data/en-de/512000
+
+#clustering and segmentation based on string distance and acyclic FSM
+cl.dbg: $(CL_OBJ_DBG)
+	$(CXX) $(CFLAGS) $(CDEBUG) -o $@ $^
+	-echo $(CURDIR)
+
+cl_baseline.dbg: $(CB_OBJ_DBG)
+	$(CXX) $(CFLAGS) $(CDEBUG) -o $@ $^
+
+ptest.dbg: $(PTEST_OBJ_DBG)
+	$(CXX) $(CFLAGS) $(CDEBUG) -o $@ $^
+
+#opt: cl ptest cl_baseline
+
+cl: $(CL_OBJ)
+	$(CXX) $(CFLAGS) $(COPT) -o $@ $^ -lm
+
+cl_baseline: $(CB_OBJ)
+	$(CXX) $(CFLAGS) $(COPT) -o $@ $^ -lm
+
+ptest: $(PTEST_OBJ)
+	$(CXX) $(CFLAGS) $(COPT) -o $@ $^
+
+install: cl ptest cl_baseline
+	ln -F -s $(foreach file,$^,$(shell pwd)/$(file)) $(HOME)/bin/
+

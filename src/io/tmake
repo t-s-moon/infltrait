@@ -1,0 +1,17 @@
+#CFLAGS = -ggdb3 -fno-elide-constructors -fno-implicit-inline-templates\
+	-fno-default-inline -DDEBUG -I$(INCLUDE)
+
+include Makefile.inc
+
+CFLAGS := -Wall -ggdb3 \
+	-DCONSERVE_MEM -DDEBUG -I$(INCLUDEDIR)
+
+HEADERS := $(wildcard *.h)
+SRC := AnsiCType.cpp IO.cpp TermByDoc.cpp test.cpp
+OBJ = ${SRC:%.cpp=%.o}
+
+test: $(OBJ)
+	g++ $(CFLAGS) -o $@ $^
+
+%.o: %.cpp $(HEADERS)
+	g++ $< $(CFLAGS) -c -o $@

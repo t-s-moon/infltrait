@@ -1,0 +1,29 @@
+
+$(DBG)/RuleByDocPS.o: RuleByDocPS.cpp Infltrait.h PPMV.h \
+	SuffixCollector.h Trie.h RuleByDoc.h ../io/IO.h \
+	../io/StringFilter.h $$(@D)/.f
+	$(CXX) $(CFLAGS) $(CDEBUG) -c $< -o $@
+
+$(DBG)/Infltrait.o: Infltrait.cpp Infltrait.h
+	$(CXX) $(CFLAGS) $(CDEBUG) -c $< -o $@
+
+$(DBG)/NamedMatrix.o: NamedMatrix.cpp NamedMatrix.h Trie.h \
+	../la/Matrix.h ../la/MiniGSL.h ../la/Op.h
+	$(CXX) $(CFLAGS) $(CDEBUG) -c $< -o $@
+
+$(DBG)/PPMV.o: PPMV.cpp	PPMV.h HashDef.h ../Defs.h
+	$(CXX) $(CFLAGS) $(CDEBUG) -c $< -o $@
+
+$(DBG)/TermByDoc.o: TermByDoc.cpp Str2IdMap.h LabeledVector.h \
+	../io/IO.h ../io/StringFilter.h
+	$(CXX) $(CFLAGS) $(CDEBUG) -c $< -o $@
+
+$(DBG)/Trie.o: Trie.cpp Trie.h PPMV.h SuffixCollector.h ../io/StringFilter.h
+	$(CXX) $(CFLAGS) $(CDEBUG) -c $< -o $@
+
+$(DBG)/RuleByDoc.o: RuleByDoc.cpp RuleByDoc.h Infltrait.h PPMV.h \
+	SuffixCollector.h Trie.h ../io/IO.h ../io/StringFilter.h
+	$(CXX) $(CFLAGS) $(CDEBUG) -c $< -o $@
+
+$(DBG)/SuffixCollector.o: SuffixCollector.cpp PPMV.h ../ml/ChiSquareTest.h
+	$(CXX) $(CFLAGS) $(CDEBUG) -c $< -o $@

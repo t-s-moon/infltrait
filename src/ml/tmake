@@ -1,0 +1,9 @@
+HEADERS = kmeans.h
+SRC = kmeans.cpp
+OBJ = ${SRC:%.cpp=%.o}
+
+default: $(OBJ)
+	g++ test.cpp -ggdb3 -DDEBUG -o test $^
+
+$(OBJ): $(SRC) $(HEADERS)
+	g++ $< -ggdb3  -DDEBUG -c $@
