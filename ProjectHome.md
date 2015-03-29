@@ -1,0 +1,1 @@
+C++ code for unsupervised clustering and segmentation of raw text. See http://www.aclweb.org/anthology-new/D/D09/D09-1070.pdf for details.
